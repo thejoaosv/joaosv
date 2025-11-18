@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Links() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -127,8 +128,14 @@ export default function Links() {
             className="mb-6 relative inline-block"
           >
             <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary p-1">
-              <div className="w-full h-full rounded-full bg-background flex items-center justify-center text-6xl font-bold bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-                JV
+              <div className="w-full h-full rounded-full overflow-hidden bg-background">
+                <Image
+                  src="/logo.png"
+                  alt="João Vasconcelos"
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </motion.div>

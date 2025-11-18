@@ -29,12 +29,13 @@ import {
   Users,
   Heart,
   Store,
-  Image,
+  Image as ImageIcon,
   Film,
   Wrench
 } from "lucide-react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 const AnimatedSection = ({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) => {
   const ref = useRef(null);
@@ -101,7 +102,7 @@ export default function Home() {
       description: "Photography and art gallery website showcasing creative work including photos, videos, music, and AI animations. A digital space for artistic expression and visual storytelling.",
       tags: ["Photography", "Art", "Portfolio", "Creative"],
       link: "https://joaovasconcelos.com",
-      icon: Image
+      icon: ImageIcon
     }
   ];
 
@@ -145,7 +146,7 @@ export default function Home() {
       year: "2017-Present",
       title: "The Gallery",
       description: "Photography and art portfolio showcasing creative work at joaovasconcelos.com",
-      icon: Image
+      icon: ImageIcon
     },
     {
       year: "2015-2016",
@@ -175,6 +176,33 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      {/* Logo */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="fixed top-6 left-6 z-50"
+      >
+        <motion.a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="block cursor-pointer"
+        >
+          <Image
+            src="/logo.png"
+            alt="João Vasconcelos"
+            width={50}
+            height={50}
+            className="rounded-lg transition-all duration-300"
+          />
+        </motion.a>
+      </motion.div>
+
       {/* Animated Background Elements */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />

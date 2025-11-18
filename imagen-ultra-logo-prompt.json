@@ -1,0 +1,12 @@
+{
+  "prompt": "Create an ultra-abstract logo mark composed of fluid, organic shapes and flowing curves that subtly hide the essence of the letters J, S, and V within their form. The design should feature dynamic, interconnected ribbons or waves in bright light blue (#60A5FA) and vibrant yellow (#FCD34D) colors that weave, overlap, and flow into each other. The shapes should be completely deconstructed - NO recognizable letterforms - just abstract curved forms, arcs, and flowing lines that create a modern, energetic symbol. Think of it as pure abstract art that only reveals the JSV pattern when analyzed closely. The composition should be bold, contemporary, and memorable with smooth gradients between the two colors. Transparent background. The overall feel should be fluid motion frozen in time - like ribbons dancing in the wind or liquid paint swirls that accidentally form letter-like curves.",
+  "aspect_ratio": "1:1",
+  "style_preset": "abstract fluid design, modern brand identity, dynamic shapes",
+  "negative_prompt": "literal letters, readable text, typography, alphabet letters, recognizable J S or V shapes, geometric sharp angles, realistic objects, photographic elements, people, animals, 3D renders, drop shadows, borders, frames, white background, solid background",
+  "guidance_scale": 8.0,
+  "seed": null,
+  "output_format": "png",
+  "transparency": true,
+  "color_palette": ["#60A5FA", "#FCD34D"],
+  "notes": "Brand colors - Light Blue: oklch(0.75 0.15 220) converted to #60A5FA | Yellow: oklch(0.78 0.15 85) converted to #FCD34D"
+}
