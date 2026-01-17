@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -9,19 +8,17 @@ import {
   Globe,
   Code,
   Twitch,
-  ChevronDown,
   Instagram,
-  Menu
+  ChevronDown
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 
 export default function Links() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [twitchOpen, setTwitchOpen] = useState(false);
 
-  const links = [
+  const mainLinks = [
     {
       icon: Mail,
       label: "Email",
@@ -32,6 +29,18 @@ export default function Links() {
       icon: ImageIcon,
       label: "The Gallery",
       href: "https://joaovasconcelos.com",
+      external: true
+    },
+    {
+      icon: Globe,
+      label: "JoaoSV Website",
+      href: "https://joaosv.com",
+      external: true
+    },
+    {
+      icon: Code,
+      label: "Coder Portfolio",
+      href: "https://joaosv.com/coder",
       external: true
     }
   ];
@@ -83,7 +92,7 @@ export default function Links() {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      {/* Animated Background */}
+      {/* Animated Background Elements - Same as home page */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
         <motion.div 
@@ -141,15 +150,10 @@ export default function Links() {
           </motion.div>
           
           <motion.h1 
-            className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-[length:200%_auto]"
-            animate={{
-              backgroundPosition: ["0% center", "200% center", "0% center"]
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "linear"
-            }}
+            className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             João Vasconcelos
           </motion.h1>
@@ -165,101 +169,38 @@ export default function Links() {
         </motion.div>
 
         {/* Main Links */}
-        <div className="space-y-1 mb-8">
-          {links.map((link, index) => (
+        <div className="space-y-3 mb-8">
+          {mainLinks.map((link, index) => (
             <motion.a
               key={index}
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * (index + 1), duration: 0.4 }}
-              whileHover={{ x: 6 }}
-              className="flex items-center py-3 text-base text-foreground hover:text-primary transition-all duration-200 cursor-pointer group"
+              whileHover={{ x: 4 }}
+              className="flex items-center gap-3 py-4 px-5 rounded-lg bg-primary/5 hover:bg-primary/10 transition-all duration-300 cursor-pointer group"
             >
-              <link.icon className="mr-3 h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-              <span className="relative">
-                {link.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
-              </span>
+              <link.icon className="h-5 w-5 text-primary" />
+              <span className="text-base font-medium flex-1">{link.label}</span>
             </motion.a>
           ))}
 
-          {/* JoaoSV Links Dropdown */}
+          {/* Twitch with Embed */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
           >
             <motion.button
-              whileHover={{ x: 6 }}
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center w-full py-3 text-base text-foreground hover:text-primary transition-all duration-200 cursor-pointer group"
-            >
-              <Menu className="mr-3 h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-              <span className="relative">
-                JoaoSV Links
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
-              </span>
-              <ChevronDown className={`ml-auto h-4 w-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} />
-            </motion.button>
-
-            <AnimatePresence>
-              {dropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden pl-7 pt-1 pb-2"
-                >
-                  <div className="flex gap-4">
-                    <motion.a
-                      href="https://joaosv.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
-                    >
-                      <Globe className="h-4 w-4" />
-                      Website
-                    </motion.a>
-                    <motion.a
-                      href="https://joaosv.com/coder"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-secondary transition-colors cursor-pointer"
-                    >
-                      <Code className="h-4 w-4" />
-                      Coder
-                    </motion.a>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Twitch Button with Embed */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.4 }}
-          >
-            <motion.button
-              whileHover={{ x: 6 }}
               onClick={() => setTwitchOpen(!twitchOpen)}
-              className="flex items-center w-full py-3 text-base text-foreground hover:text-primary transition-all duration-200 cursor-pointer group"
+              whileHover={{ x: 4 }}
+              className="flex items-center gap-3 py-4 px-5 rounded-lg bg-primary/5 hover:bg-primary/10 transition-all duration-300 cursor-pointer group w-full"
             >
-              <Twitch className="mr-3 h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-              <span className="relative">
-                Watch Twitch
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
-              </span>
-              <ChevronDown className={`ml-auto h-4 w-4 transition-transform duration-300 ${twitchOpen ? 'rotate-180' : ''}`} />
+              <Twitch className="h-5 w-5 text-primary" />
+              <span className="text-base font-medium flex-1 text-left">Watch Live on Twitch</span>
+              <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${twitchOpen ? 'rotate-180' : ''}`} />
             </motion.button>
 
             <AnimatePresence>
@@ -269,7 +210,7 @@ export default function Links() {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="overflow-hidden mt-3 mb-2"
+                  className="overflow-hidden mt-3"
                 >
                   <div className="rounded-lg overflow-hidden border border-border/20">
                     <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
@@ -286,29 +227,29 @@ export default function Links() {
           </motion.div>
         </div>
 
-        <Separator className="my-6" />
+        <Separator className="my-8" />
 
         {/* Social Icons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.4 }}
+          transition={{ delay: 0.6, duration: 0.4 }}
           className="flex justify-center gap-3 mb-6"
         >
           {socialLinks.map((social, index) => (
             <motion.div
               key={index}
-              whileHover={{ scale: 1.15, y: -2 }}
+              whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               <Button
                 variant="ghost"
                 size="icon"
-                className={`h-9 w-9 hover:bg-primary/10 text-foreground transition-colors cursor-pointer ${social.hoverColor}`}
+                className={`h-10 w-10 hover:bg-primary/10 text-foreground transition-colors cursor-pointer ${social.hoverColor}`}
                 asChild
               >
                 <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
-                  <social.icon className="h-5 w-5" />
+                  <social.icon className="h-6 w-6" />
                 </a>
               </Button>
             </motion.div>
@@ -319,7 +260,7 @@ export default function Links() {
         <motion.footer
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.4 }}
+          transition={{ delay: 0.7, duration: 0.4 }}
           className="text-center"
         >
           <p className="text-xs text-muted-foreground py-4">

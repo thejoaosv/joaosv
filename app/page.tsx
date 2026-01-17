@@ -372,24 +372,22 @@ export default function Home() {
       {/* Stats Section */}
       <AnimatedSection className="px-6 py-20 relative">
         <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <AnimatedCard key={index} delay={index * 0.1}>
-                <Card className="text-center border-border/50 bg-card/50 backdrop-blur hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="pt-6">
-                    <stat.icon className="h-8 w-8 mx-auto mb-3 text-primary" />
-                    <motion.div
-                      className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3, type: "spring" }}
-                    >
-                      {stat.number}
-                    </motion.div>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  </CardContent>
-                </Card>
+                <div className="text-center p-6 rounded-lg hover:bg-primary/5 transition-all duration-300">
+                  <stat.icon className="h-8 w-8 mx-auto mb-3 text-primary" />
+                  <motion.div
+                    className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3, type: "spring" }}
+                  >
+                    {stat.number}
+                  </motion.div>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                </div>
               </AnimatedCard>
             ))}
           </div>
@@ -412,24 +410,21 @@ export default function Home() {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
               <AnimatedCard key={index} delay={index * 0.05}>
                 <motion.div
                   whileHover={{ scale: 1.05, rotate: 2 }}
                   whileTap={{ scale: 0.95 }}
+                  className="flex flex-col items-center justify-center p-6 text-center rounded-lg hover:bg-primary/5 transition-all duration-300 cursor-pointer"
                 >
-                  <Card className="border-border/50 bg-card/50 backdrop-blur hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 cursor-pointer">
-                    <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-                      <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <skill.icon className={`mb-3 h-10 w-10 ${skill.color}`} />
-                      </motion.div>
-                      <p className="font-medium">{skill.name}</p>
-                    </CardContent>
-                  </Card>
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <skill.icon className={`mb-3 h-10 w-10 ${skill.color}`} />
+                  </motion.div>
+                  <p className="font-medium">{skill.name}</p>
                 </motion.div>
               </AnimatedCard>
             ))}
@@ -455,56 +450,47 @@ export default function Home() {
             </p>
           </motion.div>
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (
               <AnimatedCard key={index} delay={index * 0.1}>
                 <motion.div
                   whileHover={{ y: -8 }}
                   transition={{ duration: 0.3 }}
+                  className="group relative p-8 rounded-lg bg-primary/5 hover:bg-primary/10 transition-all duration-300 h-full"
                 >
-                  <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 h-full">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-0 transition-opacity group-hover:opacity-100" />
-                    
-                    <CardHeader className="relative">
-                      <div className="flex items-center justify-between mb-3">
-                        <motion.div
-                          whileHover={{ rotate: 360, scale: 1.2 }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          <project.icon className="h-10 w-10 text-primary" />
-                        </motion.div>
-                        <ExternalLink className="h-5 w-5 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1 text-primary" />
-                      </div>
-                      <CardTitle className="text-2xl">{project.name}</CardTitle>
-                      <CardDescription className="text-base leading-relaxed">
-                        {project.description}
-                      </CardDescription>
-                    </CardHeader>
-                    
-                    <CardContent className="relative">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag, i) => (
-                          <motion.span
-                            key={i}
-                            className="px-3 py-1 text-xs font-medium rounded-full bg-secondary/10 text-secondary border border-secondary/20"
-                            whileHover={{ scale: 1.1 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            {tag}
-                          </motion.span>
-                        ))}
-                      </div>
-                    </CardContent>
-                    
-                    {project.link !== "#" && (
-                      <a 
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute inset-0"
-                      />
-                    )}
-                  </Card>
+                  <div className="mb-6 flex items-center justify-between">
+                    <motion.div
+                      whileHover={{ rotate: 360, scale: 1.2 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <project.icon className="h-10 w-10 text-primary" />
+                    </motion.div>
+                    <ExternalLink className="h-5 w-5 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">{project.name}</h3>
+                  <p className="text-base text-muted-foreground leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, i) => (
+                      <motion.span
+                        key={i}
+                        className="px-3 py-1 text-xs font-medium rounded-full bg-secondary/10 text-secondary border border-secondary/20"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
+                  {project.link !== "#" && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute inset-0"
+                    />
+                  )}
                 </motion.div>
               </AnimatedCard>
             ))}
@@ -549,17 +535,15 @@ export default function Home() {
                       <item.icon className="h-5 w-5 text-primary-foreground" />
                     </motion.div>
                     
-                    <Card className="border-border/50 bg-card/50 backdrop-blur hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
-                      <CardHeader>
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-2xl font-bold text-primary">{item.year}</span>
-                        </div>
-                        <CardTitle className="text-xl">{item.title}</CardTitle>
-                        <CardDescription className="text-base">
-                          {item.description}
-                        </CardDescription>
-                      </CardHeader>
-                    </Card>
+                    <div className="p-6 rounded-lg bg-primary/5 hover:bg-primary/10 transition-all duration-300">
+                      <div className="mb-3">
+                        <span className="text-2xl font-bold text-primary">{item.year}</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                      <p className="text-base text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </div>
                   </motion.div>
                 </AnimatedCard>
               ))}
@@ -592,50 +576,44 @@ export default function Home() {
                 <motion.div
                   whileHover={{ scale: 1.05, rotate: 1 }}
                   transition={{ duration: 0.3 }}
+                  className="flex items-center gap-4 p-6 rounded-lg bg-primary/5 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
                 >
-                  <Card className="border-border/50 bg-card/50 backdrop-blur hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 overflow-hidden group cursor-pointer">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <CardContent className="flex items-center gap-4 p-6 relative">
-                      <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <interest.icon className="h-10 w-10 text-primary" />
-                      </motion.div>
-                      <div>
-                        <h3 className="font-semibold text-lg mb-1">{interest.label}</h3>
-                        <p className="text-sm text-muted-foreground">{interest.description}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <interest.icon className="h-10 w-10 text-primary" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">{interest.label}</h3>
+                    <p className="text-sm text-muted-foreground">{interest.description}</p>
+                  </div>
                 </motion.div>
               </AnimatedCard>
             ))}
           </div>
           
           <AnimatedCard delay={0.3}>
-            <Card className="border-border/50 bg-card/50 backdrop-blur">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl">
-                  <Heart className="h-6 w-6 text-primary" />
-                  About Me
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className="p-8 rounded-lg bg-primary/5">
+              <div className="flex items-center gap-2 text-2xl font-bold mb-6">
+                <Heart className="h-6 w-6 text-primary" />
+                About Me
+              </div>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p className="text-lg">
                   I'm a high school student in{" "}
-                  <span className="text-primary font-medium">Portugal</span> with an insatiable 
+                  <span className="text-primary font-medium">Portugal</span> with an insatiable
                   curiosity for{" "}
                   <span className="text-primary font-medium">engineering</span> and{" "}
-                  <span className="text-secondary font-medium">technology</span>. 
-                  My journey started with simple scripts and has evolved into building 
+                  <span className="text-secondary font-medium">technology</span>.
+                  My journey started with simple scripts and has evolved into building
                   full-scale applications that serve real users.
                 </p>
                 <p className="text-lg">
                   I believe in the power of{" "}
                   <span className="text-primary font-medium">artificial intelligence</span>{" "}
-                  to transform how we solve problems, which led me to create LorkAI.org. 
-                  I'm constantly learning, experimenting, and pushing the boundaries of what's possible 
+                  to transform how we solve problems, which led me to create LorkAI.org.
+                  I'm constantly learning, experimenting, and pushing the boundaries of what's possible
                   with code.
                 </p>
                 <p className="text-lg">
@@ -655,8 +633,8 @@ export default function Home() {
                   <span className="text-secondary font-medium">travel</span> adventure. These passions fuel my creativity and remind me
                   that the best solutions come from diverse perspectives.
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </AnimatedCard>
         </div>
       </AnimatedSection>
@@ -669,35 +647,32 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="p-12 rounded-lg bg-primary/5"
           >
-            <Card className="border-border/50 bg-card/50 backdrop-blur">
-              <CardContent className="p-12">
-                <Zap className="h-16 w-16 mx-auto mb-6 text-primary" />
-                <h2 className="text-4xl font-bold mb-4">Let's Build Something Amazing</h2>
-                <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  Have an idea or just want to chat about technology? I'm always open to 
-                  new opportunities and collaborations.
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-6 cursor-pointer" asChild>
-                      <a href="mailto:contact@joaosv.com">
-                        <Mail className="mr-2 h-5 w-5" />
-                        Send Me an Email
-                      </a>
-                    </Button>
-                  </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button size="lg" variant="outline" className="border-primary/30 hover:border-primary hover:bg-primary/5 text-foreground hover:text-foreground text-lg px-8 py-6 cursor-pointer" asChild>
-                      <a href="https://github.com/thejoaosv" target="_blank" rel="noopener noreferrer">
-                        <Github className="mr-2 h-5 w-5" />
-                        View GitHub
-                      </a>
-                    </Button>
-                  </motion.div>
-                </div>
-              </CardContent>
-            </Card>
+            <Zap className="h-16 w-16 mx-auto mb-6 text-primary" />
+            <h2 className="text-4xl font-bold mb-4">Let's Build Something Amazing</h2>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Have an idea or just want to chat about technology? I'm always open to
+              new opportunities and collaborations.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-6 cursor-pointer" asChild>
+                  <a href="mailto:contact@joaosv.com">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Send Me an Email
+                  </a>
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button size="lg" variant="outline" className="border-primary/30 hover:border-primary hover:bg-primary/5 text-foreground hover:text-foreground text-lg px-8 py-6 cursor-pointer" asChild>
+                  <a href="https://github.com/thejoaosv" target="_blank" rel="noopener noreferrer">
+                    <Github className="mr-2 h-5 w-5" />
+                    View GitHub
+                  </a>
+                </Button>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </AnimatedSection>
