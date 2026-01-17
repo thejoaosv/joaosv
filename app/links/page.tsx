@@ -215,7 +215,7 @@ export default function Links() {
                   <div className="rounded-lg overflow-hidden border border-border/20">
                     <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                       <iframe
-                        src="https://player.twitch.tv/?channel=thejoaosv&parent=localhost"
+                        src="https://player.twitch.tv/?channel=thejoaosv&parent=joaosv.dev"
                         className="absolute top-0 left-0 w-full h-full"
                         allowFullScreen
                       />
