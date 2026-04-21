@@ -45,6 +45,20 @@
 
 :root {
   --radius: 0.625rem;
+  --font-geist-sans: Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-geist-mono: "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --page-bg: #f7f2ea;
+  --page-fg: #1f1d19;
+  --page-muted: #645d52;
+  --page-soft: #fffaf2;
+  --page-card: #fffaf2;
+  --page-line: color-mix(in srgb, var(--page-fg) 13%, transparent);
+  --page-line-strong: color-mix(in srgb, var(--page-fg) 20%, transparent);
+  --page-accent: #5f5f5b;
+  --page-accent-soft: #e3e1dc;
+  --page-inverse-muted: color-mix(in srgb, var(--page-bg) 72%, transparent);
+  --page-glass: color-mix(in srgb, var(--page-bg) 78%, transparent);
+  --page-nav: color-mix(in srgb, var(--page-bg) 86%, transparent);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -79,6 +93,18 @@
 }
 
 .dark {
+  --page-bg: #1f1d19;
+  --page-fg: #f7f2ea;
+  --page-muted: #c7bcae;
+  --page-soft: #15130f;
+  --page-card: #28251f;
+  --page-line: color-mix(in srgb, var(--page-fg) 14%, transparent);
+  --page-line-strong: color-mix(in srgb, var(--page-fg) 23%, transparent);
+  --page-accent: #b8b8b1;
+  --page-accent-soft: #343431;
+  --page-inverse-muted: color-mix(in srgb, var(--page-bg) 72%, transparent);
+  --page-glass: color-mix(in srgb, var(--page-bg) 76%, transparent);
+  --page-nav: color-mix(in srgb, var(--page-bg) 88%, transparent);
   --background: oklch(0.12 0 0);
   --foreground: oklch(0.98 0 0);
   --card: oklch(0.18 0 0);
@@ -118,5 +144,54 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: var(--page-bg);
+    color: var(--page-fg);
+    font-family: var(--font-geist-sans);
+    letter-spacing: 0;
+    transition:
+      background-color 520ms ease,
+      color 520ms ease;
+  }
+}
+
+::selection {
+  background: var(--page-fg);
+  color: var(--page-bg);
+}
+
+html {
+  background: var(--page-bg);
+  scroll-behavior: smooth;
+  transition:
+    background-color 520ms ease,
+    color 520ms ease;
+}
+
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 280ms;
+  transition-timing-function: ease;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: ease;
+}
+
+.page-leaving body {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
   }
 }
