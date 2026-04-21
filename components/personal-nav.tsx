@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { TransitionLink } from "@/components/transition-link";
 
 type PersonalNavProps = {
-  current?: "home" | "links";
+  current?: "home" | "links" | "blog";
 };
 
 export function PersonalNav({ current = "home" }: PersonalNavProps) {
@@ -28,7 +28,7 @@ export function PersonalNav({ current = "home" }: PersonalNavProps) {
       <div
         className={`mx-auto flex h-12 max-w-4xl items-center justify-between border px-2 text-sm text-[color:var(--page-fg)] backdrop-blur-xl transition-all duration-500 md:px-3 ${
           lifted
-            ? "border-[color:var(--page-line-strong)] bg-[color:var(--page-nav)] shadow-[0_18px_50px_color-mix(in_srgb,var(--page-fg)_13%,transparent)]"
+            ? "border-[color:color-mix(in_srgb,var(--page-fg)_8%,transparent)] bg-[color:color-mix(in_srgb,var(--page-bg)_72%,transparent)] shadow-[0_14px_38px_color-mix(in_srgb,var(--page-fg)_7%,transparent)]"
             : "border-transparent bg-transparent shadow-none"
         }`}
       >
@@ -62,7 +62,7 @@ export function PersonalNav({ current = "home" }: PersonalNavProps) {
           </TransitionLink>
           <a
             href="mailto:hey@joaosv.com"
-            className="ml-1 hidden items-center gap-1 bg-[color:var(--page-fg)] px-3 py-2 font-medium text-[color:var(--page-bg)] transition-colors duration-500 hover:opacity-85 sm:inline-flex"
+            className="hidden items-center gap-1 px-3 py-2 text-[color:var(--page-muted)] transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:inline-flex"
           >
             Write <ArrowUpRight className="size-3.5" />
           </a>

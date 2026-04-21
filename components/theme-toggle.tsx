@@ -40,7 +40,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="theme-toggle grid size-9 place-items-center border border-[color:var(--page-line)] bg-[color:var(--page-glass)] text-[color:var(--page-fg)] transition-colors duration-500 hover:bg-[color:var(--page-card)]"
+      className="theme-toggle grid h-9 w-9 place-items-center text-[color:var(--page-muted)] transition-colors duration-500 hover:text-[color:var(--page-fg)]"
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
       title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
     >

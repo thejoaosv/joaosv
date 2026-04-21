@@ -1,9 +1,9 @@
 import {
   ArrowUpRight,
+  BookOpen,
+  Building2,
   Camera,
-  Code2,
   Github,
-  Globe,
   Mail,
 } from "lucide-react";
 import { PersonalNav } from "@/components/personal-nav";
@@ -70,10 +70,10 @@ const mainLinks = [
     featured: true,
   },
   {
-    label: "Gallery",
-    note: "Photography and visual work",
-    href: "https://joaovasconcelos.com",
-    icon: Camera,
+    label: "Trinnea",
+    note: "Company behind the projects I ship",
+    href: "https://trinnea.com",
+    icon: Building2,
     featured: true,
   },
   {
@@ -84,16 +84,16 @@ const mainLinks = [
     featured: true,
   },
   {
-    label: "Home",
-    note: "The main page here",
-    href: "/",
-    icon: Globe,
+    label: "Blog",
+    note: "Writing and project notes",
+    href: "/blog",
+    icon: BookOpen,
   },
   {
-    label: "Code page",
-    note: "Older project notes",
-    href: "https://joaosv.com/coder",
-    icon: Code2,
+    label: "Gallery",
+    note: "Photography and visual work",
+    href: "https://joaovasconcelos.com",
+    icon: Camera,
   },
 ];
 
@@ -144,8 +144,8 @@ export default function Links() {
             My links.
           </h1>
           <p className="mt-6 max-w-sm text-lg leading-8 text-[color:var(--page-muted)]">
-            Simple place for the main stuff: email, photos, code, socials and a
-            few places I use.
+            Simple place for the main stuff: email, Trinnea, writing, code,
+            socials and photos.
           </p>
         </header>
 
