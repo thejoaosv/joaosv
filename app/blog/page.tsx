@@ -33,16 +33,15 @@ export default function Blog() {
           <div>
             <p className="mb-5 inline-flex items-center gap-2 text-base text-[color:var(--page-muted)]">
               <BookOpen className="size-4" />
-              writing soon
+              building, thinking, remembering
             </p>
             <h1 className="max-w-2xl text-[clamp(3.4rem,8vw,7rem)] font-semibold leading-[0.9]">
               Blog.
             </h1>
           </div>
           <p className="max-w-xl text-lg leading-8 text-[color:var(--page-muted)] md:text-xl md:leading-9">
-            I want this to become a place for project notes, ideas I keep
-            returning to, and things I learn while building. No posts yet, but
-            the room is here.
+            Notes from projects, longer thoughts about software and creativity,
+            and small observations from the things that keep coming back.
           </p>
         </div>
 
