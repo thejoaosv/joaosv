@@ -57,7 +57,7 @@ export default function Home() {
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[color:var(--page-bg)] text-[color:var(--page-fg)]">
       <PersonalNav current="home" />
 
-      <section className="flex min-h-[88svh] items-center px-5 pb-12 pt-28 md:px-8 md:pb-16 md:pt-32">
+      <section className="px-5 pb-20 pt-20 md:px-8 md:pb-28 md:pt-24">
         <div className="mx-auto max-w-4xl">
           <p className="mb-8 text-base text-[color:var(--page-muted)] md:text-lg">
             Hi, I am João.
@@ -90,15 +90,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-[color:var(--page-line)] px-5 py-12 md:px-8 md:py-20">
+      <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-[0.8fr_1.2fr] md:gap-12">
           <h2 className="text-3xl font-semibold leading-tight md:text-5xl">
             How I see things
           </h2>
           <div className="space-y-5 text-lg leading-8 text-[color:var(--page-muted)]">
             <p>
-              Pretty chill and easy to talk to. I like people who are
-              curious, direct, and excited about making things better.
+              Pretty chill and easy to talk to. I like people who are curious,
+              direct, and excited about making things better.
             </p>
             <p>
               Still learning, so I do not want this place to pretend everything
