@@ -2,7 +2,7 @@
 title: "Example draft"
 description: "Use this file as a template for future posts."
 date: "2026-04-21"
-draft: false
+draft: true
 ---
 
 This draft is not published because `draft` is set to `true`.

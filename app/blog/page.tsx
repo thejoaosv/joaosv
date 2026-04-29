@@ -1,4 +1,4 @@
-import { ArrowUpRight, BookOpen, Code2, PenLine, Sparkles } from "lucide-react";
+import { ArrowUpRight, Code2, PenLine, Sparkles } from "lucide-react";
 import { PersonalNav } from "@/components/personal-nav";
 import { TransitionLink } from "@/components/transition-link";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
@@ -32,7 +32,6 @@ export default function Blog() {
         <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <div>
             <p className="mb-5 inline-flex items-center gap-2 text-base text-[color:var(--page-muted)]">
-              <BookOpen className="size-4" />
               building, thinking, remembering
             </p>
             <h1 className="max-w-2xl text-[clamp(3.4rem,8vw,7rem)] font-semibold leading-[0.9]">
@@ -58,9 +57,7 @@ export default function Blog() {
                 </span>
                 <span>
                   <span className="flex items-start justify-between gap-6">
-                    <span className="text-2xl font-semibold">
-                      {post.title}
-                    </span>
+                    <span className="text-2xl font-semibold">{post.title}</span>
                     <ArrowUpRight className="mt-1 size-5 shrink-0 text-[color:var(--page-accent)] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </span>
                   {post.description ? (
@@ -92,7 +89,7 @@ export default function Blog() {
         <div className="mt-10 flex flex-col gap-3 border-t border-[color:var(--page-line)] pt-8 sm:flex-row">
           <a
             href="mailto:hey@joaosv.com"
-            className="inline-flex h-12 items-center justify-center bg-[color:var(--page-fg)] px-6 font-medium text-[color:var(--page-bg)] transition-colors hover:opacity-85"
+            className="inline-flex h-12 w-full items-center justify-center border border-transparent bg-[color:var(--page-fg)] px-6 font-medium text-[color:var(--page-bg)] transition-colors hover:opacity-85 sm:w-44"
           >
             Send an idea
             <ArrowUpRight className="ml-2 size-4" />
@@ -101,7 +98,7 @@ export default function Blog() {
             href="https://trinnea.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-12 items-center justify-center border border-[color:var(--page-line-strong)] px-6 font-medium text-[color:var(--page-fg)] transition-colors hover:bg-[color:var(--page-card)]"
+            className="inline-flex h-12 w-full items-center justify-center border border-[color:var(--page-line-strong)] px-6 font-medium text-[color:var(--page-fg)] transition-colors hover:bg-[color:var(--page-card)] sm:w-44"
           >
             Visit Trinnea
             <ArrowUpRight className="ml-2 size-4" />

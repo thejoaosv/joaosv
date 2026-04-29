@@ -173,6 +173,15 @@ html {
   transition-timing-function: ease;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  transition-property: background-color, border-color, fill, stroke, opacity, box-shadow, transform;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 260ms;

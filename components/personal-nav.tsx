@@ -46,7 +46,7 @@ export function PersonalNav({ current = "home" }: PersonalNavProps) {
         <div className="flex items-center gap-1">
           <TransitionLink
             href="/"
-            className={`px-3 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] ${
+            className={`px-2 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:px-3 ${
               current === "home" ? "text-[color:var(--page-fg)]" : "text-[color:var(--page-muted)]"
             }`}
           >
@@ -54,11 +54,19 @@ export function PersonalNav({ current = "home" }: PersonalNavProps) {
           </TransitionLink>
           <TransitionLink
             href="/links"
-            className={`px-3 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] ${
+            className={`px-2 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:px-3 ${
               current === "links" ? "text-[color:var(--page-fg)]" : "text-[color:var(--page-muted)]"
             }`}
           >
             Links
+          </TransitionLink>
+          <TransitionLink
+            href="/blog"
+            className={`px-2 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:px-3 ${
+              current === "blog" ? "text-[color:var(--page-fg)]" : "text-[color:var(--page-muted)]"
+            }`}
+          >
+            Blog
           </TransitionLink>
           <a
             href="mailto:hey@joaosv.com"
