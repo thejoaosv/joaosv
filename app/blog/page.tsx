@@ -1,6 +1,7 @@
 import { ArrowUpRight, Code2, PenLine, Sparkles } from "lucide-react";
 import { PersonalNav } from "@/components/personal-nav";
 import { TransitionLink } from "@/components/transition-link";
+import { Button } from "@/components/ui/button";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
 
 const writingThemes = [
@@ -87,22 +88,27 @@ export default function Blog() {
         )}
 
         <div className="mt-10 flex flex-col gap-3 border-t border-[color:var(--page-line)] pt-8 sm:flex-row">
-          <a
-            href="mailto:hey@joaosv.com"
-            className="inline-flex h-12 w-full items-center justify-center border border-transparent bg-[color:var(--page-fg)] px-6 font-medium text-[color:var(--page-bg)] transition-colors hover:opacity-85 sm:w-44"
+          <Button asChild variant="page" size="cta-lg" className="w-full sm:w-44">
+            <a href="mailto:hey@joaosv.com">
+              Send an idea
+              <ArrowUpRight className="size-4" />
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="page-outline"
+            size="cta-lg"
+            className="w-full sm:w-44"
           >
-            Send an idea
-            <ArrowUpRight className="ml-2 size-4" />
-          </a>
-          <a
-            href="https://trinnea.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-12 w-full items-center justify-center border border-[color:var(--page-line-strong)] px-6 font-medium text-[color:var(--page-fg)] transition-colors hover:bg-[color:var(--page-card)] sm:w-44"
-          >
-            Visit Trinnea
-            <ArrowUpRight className="ml-2 size-4" />
-          </a>
+            <a
+              href="https://trinnea.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit Trinnea
+              <ArrowUpRight className="size-4" />
+            </a>
+          </Button>
         </div>
       </section>
     </main>
