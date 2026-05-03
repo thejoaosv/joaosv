@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "portless run next dev",
     "build": "next build",
-    "start": "portless run next start",
+    "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
