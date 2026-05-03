@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { PersonalNav } from "@/components/personal-nav";
 import { TransitionLink } from "@/components/transition-link";
+import { Button } from "@/components/ui/button";
 
 const interests = [
   {
@@ -72,20 +73,23 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <TransitionLink
-              href="/links"
-              className="inline-flex h-11 w-full items-center justify-center border border-transparent bg-[color:var(--page-fg)] px-5 text-sm font-medium text-[color:var(--page-bg)] transition-colors hover:opacity-85 sm:w-48"
+            <Button asChild variant="page" size="cta" className="w-full sm:w-48">
+              <TransitionLink href="/links">
+                Find me elsewhere
+                <ArrowUpRight className="size-4" />
+              </TransitionLink>
+            </Button>
+            <Button
+              asChild
+              variant="page-outline"
+              size="cta"
+              className="w-full sm:w-48"
             >
-              Find me elsewhere
-              <ArrowUpRight className="ml-2 size-4" />
-            </TransitionLink>
-            <a
-              href="mailto:hey@joaosv.com"
-              className="inline-flex h-11 w-full items-center justify-center border border-[color:var(--page-line-strong)] px-5 text-sm font-medium text-[color:var(--page-fg)] transition-colors hover:bg-[color:var(--page-card)] sm:w-48"
-            >
-              Say hi
-              <Mail className="ml-2 size-4" />
-            </a>
+              <a href="mailto:hey@joaosv.com">
+                Say hi
+                <Mail className="size-4" />
+              </a>
+            </Button>
           </div>
         </div>
       </section>
@@ -154,31 +158,39 @@ export default function Home() {
             </p>
           </div>
           <div className="flex gap-2">
-            <a
-              href="https://github.com/thejoaosv"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="grid size-11 place-items-center border border-[color:var(--page-line)] text-[color:var(--page-fg)] transition-colors hover:bg-[color:var(--page-card)]"
+            <Button
+              asChild
+              variant="page-outline"
+              size="icon-cta"
               aria-label="GitHub"
             >
-              <Github className="size-5" />
-            </a>
-            <a
-              href="https://instagram.com/thejoaosv"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="grid size-11 place-items-center border border-[color:var(--page-line)] text-[color:var(--page-fg)] transition-colors hover:bg-[color:var(--page-card)]"
+              <a
+                href="https://github.com/thejoaosv"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="size-5" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="page-outline"
+              size="icon-cta"
               aria-label="Instagram"
             >
-              <Instagram className="size-5" />
-            </a>
-            <a
-              href="mailto:hey@joaosv.com"
-              className="grid size-11 place-items-center border border-transparent bg-[color:var(--page-fg)] text-[color:var(--page-bg)] transition-colors hover:opacity-85"
-              aria-label="Email"
-            >
-              <Mail className="size-5" />
-            </a>
+              <a
+                href="https://instagram.com/thejoaosv"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="size-5" />
+              </a>
+            </Button>
+            <Button asChild variant="page" size="icon-cta" aria-label="Email">
+              <a href="mailto:hey@joaosv.com">
+                <Mail className="size-5" />
+              </a>
+            </Button>
           </div>
         </div>
       </footer>
