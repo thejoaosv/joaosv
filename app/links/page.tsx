@@ -70,9 +70,9 @@ const mainLinks = [
     featured: true,
   },
   {
-    label: "Trinnea",
+    label: "Zule",
     note: "Company behind the projects I ship",
-    href: "https://trinnea.com",
+    href: "https://zulelabs.com",
     icon: Building2,
     featured: true,
   },
