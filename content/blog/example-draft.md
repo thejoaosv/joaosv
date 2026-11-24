@@ -1,7 +1,7 @@
 ---
 title: "Example draft"
 description: "Use this file as a template for future posts."
-date: "2026-04-21"
+date: "2026-11-23"
 draft: true
 ---
 
@@ -16,7 +16,7 @@ When you want to publish a post:
 
 ## Markdown works
 
-You can use **bold text**, _italic text_, links like [Trinnea](https://trinnea.com), lists, quotes, tables, and code blocks.
+You can use **bold text**, _italic text_, links like [Zule](https://zulelabs.com), lists, quotes, tables, and code blocks.
 
 ```tsx
 export function TinyIdea() {
@@ -31,3 +31,4 @@ Put images in `public/blog/your-post/` and reference them with an absolute path:
 ```md
 ![A photo description](/blog/your-post/photo.png)
 ```
+![A placeholder description](https://placehold.co/1600x1000/grey/white?text=Hello+World)

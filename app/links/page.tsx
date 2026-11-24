@@ -1,13 +1,6 @@
-import {
-  ArrowUpRight,
-  BookOpen,
-  Building2,
-  Camera,
-  Github,
-  Mail,
-} from "lucide-react";
-import { PersonalNav } from "@/components/personal-nav";
-import { TransitionLink } from "@/components/transition-link";
+import type { Metadata } from "next";
+import { BookOpen, Building2, Camera, Github, Mail } from "lucide-react";
+import { Row, RowList } from "@/components/row-list";
 
 type LogoProps = {
   className?: string;
@@ -61,186 +54,51 @@ function TwitchLogo({ className }: LogoProps) {
   );
 }
 
+export const metadata: Metadata = { title: "Links" };
+
 const mainLinks = [
-  {
-    label: "Email",
-    note: "Best way to reach me",
-    href: "mailto:hey@joaosv.com",
-    icon: Mail,
-    featured: true,
-  },
-  {
-    label: "Zule",
-    note: "Company behind the projects I ship",
-    href: "https://zulelabs.com",
-    icon: Building2,
-    featured: true,
-  },
-  {
-    label: "GitHub",
-    note: "Code and experiments",
-    href: "https://github.com/thejoaosv",
-    icon: Github,
-    featured: true,
-  },
-  {
-    label: "Blog",
-    note: "Writing and project notes",
-    href: "/blog",
-    icon: BookOpen,
-  },
-  {
-    label: "Gallery",
-    note: "Photography and visual work",
-    href: "https://joaovasconcelos.com",
-    icon: Camera,
-  },
+  { label: "Email", note: "hey@joaosv.com", href: "mailto:hey@joaosv.com", icon: Mail },
+  { label: "Zule", note: "Company behind my projects", href: "https://zulelabs.com", icon: Building2 },
+  { label: "GitHub", note: "Code and experiments", href: "https://github.com/thejoaosv", icon: Github },
+  { label: "Blog", note: "Notes from building", href: "/blog", icon: BookOpen },
+  { label: "Gallery", note: "Photos I've taken", href: "https://joaovasconcelos.com", icon: Camera },
 ];
 
 const socialLinks = [
-  {
-    label: "X",
-    href: "https://x.com/thejoaosv",
-    icon: XLogo,
-  },
-  {
-    label: "Bluesky",
-    href: "https://bsky.app/profile/me.joaosv.com",
-    icon: BlueskyLogo,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/joaosvasconcelos/",
-    icon: LinkedInLogo,
-  },
-  {
-    label: "TikTok",
-    href: "https://tiktok.com/@thejoaosv",
-    icon: TikTokLogo,
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com/thejoaosv",
-    icon: InstagramLogo,
-  },
-  {
-    label: "Twitch",
-    href: "https://twitch.tv/thejoaosv",
-    icon: TwitchLogo,
-  },
+  { label: "X", href: "https://x.com/thejoaosv", icon: XLogo },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/joaosvasconcelos/", icon: LinkedInLogo },
+  { label: "Instagram", href: "https://instagram.com/thejoaosv", icon: InstagramLogo },
+  { label: "TikTok", href: "https://tiktok.com/@thejoaosv", icon: TikTokLogo },
+  { label: "Twitch", href: "https://twitch.tv/thejoaosv", icon: TwitchLogo },
 ];
 
 export default function Links() {
   return (
-    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[color:var(--page-bg)] px-5 pb-12 pt-28 text-[color:var(--page-fg)] md:px-8 md:pt-32">
-      <PersonalNav current="links" />
+    <main className="page">
+      <h1 className="title">Links</h1>
 
-      <section className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-start">
-        <header className="md:sticky md:top-28">
-          <p className="mb-4 text-base text-[color:var(--page-muted)]">
-            quick ways to find me
-          </p>
-          <h1 className="max-w-sm text-[clamp(3.2rem,8vw,6.5rem)] font-semibold leading-[0.9]">
-            My links.
-          </h1>
-          <p className="mt-6 max-w-sm text-lg leading-8 text-[color:var(--page-muted)]">
-            Simple place for the main stuff: email, Trinnea, writing, code,
-            socials and photos.
-          </p>
-        </header>
+      <RowList>
+        {mainLinks.map((link) => (
+          <Row key={link.href} {...link} />
+        ))}
+      </RowList>
 
-        <div className="grid gap-4">
-          <div className="grid gap-3">
-            {mainLinks.map((link) => {
-              const classes = `group flex items-center justify-between gap-5 border transition-all duration-300 ${
-                link.featured
-                  ? "border-[color:var(--page-fg)] bg-[color:var(--page-fg)] p-5 text-[color:var(--page-bg)] hover:opacity-90 md:p-6"
-                  : "border-[color:var(--page-line)] bg-[color:var(--page-glass)] p-5 text-[color:var(--page-fg)] hover:border-[color:var(--page-line-strong)] hover:bg-[color:var(--page-card)]"
-              }`;
-
-              const content = (
-                <>
-                  <span className="flex min-w-0 items-center gap-4">
-                    <span
-                      className={`grid size-11 shrink-0 place-items-center ${
-                        link.featured
-                          ? "bg-[color:var(--page-bg)] text-[color:var(--page-fg)]"
-                          : "bg-[color:var(--page-fg)] text-[color:var(--page-bg)]"
-                      }`}
-                    >
-                      <link.icon className="size-5" />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-xl font-semibold">
-                        {link.label}
-                      </span>
-                      <span
-                        className={`mt-1 block text-sm leading-5 ${
-                          link.featured
-                            ? "text-[color:var(--page-inverse-muted)]"
-                            : "text-[color:var(--page-muted)]"
-                        }`}
-                      >
-                        {link.note}
-                      </span>
-                    </span>
-                  </span>
-                  <ArrowUpRight
-                    className={`size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 ${
-                      link.featured
-                        ? "text-[color:var(--page-bg)]"
-                        : "text-[color:var(--page-accent)]"
-                    }`}
-                  />
-                </>
-              );
-
-              if (link.href.startsWith("/")) {
-                return (
-                  <TransitionLink key={link.href} href={link.href} className={classes}>
-                    {content}
-                  </TransitionLink>
-                );
-              }
-
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className={classes}
-                >
-                  {content}
-                </a>
-              );
-            })}
-          </div>
-
-          <div className="flex flex-wrap gap-1.5 border-t border-[color:var(--page-line)] pt-4 sm:flex-nowrap">
-            {socialLinks.map((link) => (
+      <section className="mt-6" aria-label="Socials">
+        <ul className="flex flex-wrap gap-x-6">
+          {socialLinks.map((link) => (
+            <li key={link.href}>
               <a
-                key={link.href}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex h-9 min-w-0 flex-1 items-center justify-center gap-1.5 border border-[color:var(--page-line)] bg-[color:var(--page-glass)] px-2 text-[11px] font-medium text-[color:var(--page-fg)] transition-colors hover:border-[color:var(--page-line-strong)] hover:bg-[color:var(--page-card)] sm:text-xs"
-                aria-label={link.label}
-                title={link.label}
+                className="inline-flex min-h-11 items-center gap-2 text-[15px] text-[color:var(--page-muted)] transition-colors hover:text-[color:var(--page-fg)]"
               >
-                <span className="grid size-4 shrink-0 place-items-center text-[color:var(--page-fg)]">
-                  <link.icon className="size-3.5" />
-                </span>
-                <span className="truncate">{link.label}</span>
+                <link.icon className="size-3.5 shrink-0" />
+                {link.label}
               </a>
-            ))}
-          </div>
-
-          <p className="text-sm leading-6 text-[color:var(--page-muted)]">
-            Kept short on purpose. If something is missing, email is probably
-            the right place.
-          </p>
-        </div>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );

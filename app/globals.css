@@ -6,8 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -45,20 +45,6 @@
 
 :root {
   --radius: 0.625rem;
-  --font-geist-sans: Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-geist-mono: "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  --page-bg: #f7f2ea;
-  --page-fg: #1f1d19;
-  --page-muted: #645d52;
-  --page-soft: #fffaf2;
-  --page-card: #fffaf2;
-  --page-line: color-mix(in srgb, var(--page-fg) 13%, transparent);
-  --page-line-strong: color-mix(in srgb, var(--page-fg) 20%, transparent);
-  --page-accent: #5f5f5b;
-  --page-accent-soft: #e3e1dc;
-  --page-inverse-muted: color-mix(in srgb, var(--page-bg) 72%, transparent);
-  --page-glass: color-mix(in srgb, var(--page-bg) 78%, transparent);
-  --page-nav: color-mix(in srgb, var(--page-bg) 86%, transparent);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -93,18 +79,6 @@
 }
 
 .dark {
-  --page-bg: #1f1d19;
-  --page-fg: #f7f2ea;
-  --page-muted: #c7bcae;
-  --page-soft: #15130f;
-  --page-card: #28251f;
-  --page-line: color-mix(in srgb, var(--page-fg) 14%, transparent);
-  --page-line-strong: color-mix(in srgb, var(--page-fg) 23%, transparent);
-  --page-accent: #b8b8b1;
-  --page-accent-soft: #343431;
-  --page-inverse-muted: color-mix(in srgb, var(--page-bg) 72%, transparent);
-  --page-glass: color-mix(in srgb, var(--page-bg) 76%, transparent);
-  --page-nav: color-mix(in srgb, var(--page-bg) 88%, transparent);
   --background: oklch(0.12 0 0);
   --foreground: oklch(0.98 0 0);
   --card: oklch(0.18 0 0);
@@ -138,19 +112,66 @@
   --sidebar-ring: oklch(0.75 0.15 220);
 }
 
+/* One dark palette, after Luma: true black space, translucent panels, white primary. */
+:root {
+  --page-bg: #000000;
+  --page-fg: #ffffff;
+  /* Solid greys: see-through text lets streaks show through the letters. */
+  --page-muted: #bdbdbd; /* 11:1 on black */
+  --page-prose: #dcdcdc; /* 15:1 */
+  --page-faint: #9a9a9a; /* 7.5:1 */
+  --page-panel: rgb(255 255 255 / 0.06);
+  --page-line: rgb(255 255 255 / 0.08);
+  --page-line-strong: rgb(255 255 255 / 0.16);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+  html {
     background: var(--page-bg);
+    color-scheme: dark;
+  }
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
     color: var(--page-fg);
-    font-family: var(--font-geist-sans);
-    letter-spacing: 0;
-    transition:
-      background-color 520ms ease,
-      color 520ms ease;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--page-fg);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .page {
+    @apply mx-auto w-full max-w-[640px] flex-1 px-4 pb-20 pt-14 md:pt-24;
+  }
+  .eyebrow {
+    @apply mb-3 text-[15px] text-[color:var(--page-muted)];
+  }
+  .title {
+    @apply text-[clamp(2.4rem,7vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-balance;
+  }
+  .lede {
+    @apply mt-4 text-lg leading-relaxed text-[color:var(--page-muted)] text-pretty;
+  }
+  .panel {
+    @apply rounded-xl border border-[color:var(--page-line)] bg-[color:var(--page-panel)] backdrop-blur-md;
+  }
+  .btn-primary,
+  .btn-secondary {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl px-5 text-[17px] font-medium transition-[opacity,background-color];
+  }
+  .btn-primary {
+    @apply bg-white text-black hover:opacity-90;
+  }
+  .btn-secondary {
+    @apply border border-[color:var(--page-line)] bg-[color:var(--page-panel)] text-[color:var(--page-fg)] backdrop-blur-md hover:bg-[color:var(--page-line-strong)];
   }
 }
 
@@ -159,48 +180,19 @@
   color: var(--page-bg);
 }
 
-html {
-  background: var(--page-bg);
-  scroll-behavior: smooth;
-  transition:
-    background-color 520ms ease,
-    color 520ms ease;
+/* New pages fade in; the canvas is outside <main>, so the stars never pause. */
+main {
+  animation: page-in 260ms ease both;
 }
 
-* {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-duration: 280ms;
-  transition-timing-function: ease;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  transition-property: background-color, border-color, fill, stroke, opacity, box-shadow, transform;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 260ms;
-  animation-timing-function: ease;
-}
-
-.page-leaving body {
-  opacity: 0;
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    transition-duration: 1ms !important;
-    animation-duration: 1ms !important;
+  main {
+    animation: none;
   }
 }
