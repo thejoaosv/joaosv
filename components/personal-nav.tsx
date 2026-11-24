@@ -52,10 +52,13 @@ export function PersonalNav() {
     <nav className="sticky top-0 z-20 flex h-16 items-center justify-between gap-2 px-4 text-[15px] sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-4 md:px-6">
       <Link
         href="/"
-        className="-ml-2 justify-self-start p-2 font-semibold tracking-tight text-[color:var(--page-fg)]"
+        className="-ml-2 justify-self-start p-2 text-[color:var(--page-fg)] transition-opacity hover:opacity-75"
         aria-label="João Vasconcelos, home"
       >
-        JV
+        {/* JV mark, brand/logo/jv-mark.svg */}
+        <svg viewBox="0 0 16 16" className="size-6" fill="currentColor" aria-hidden="true">
+          <path d="M3.55 2H5.05V11.43L4.185 14H1.45L1.921 12.6H3.121L3.55 11.326Z M6.25 2H7.833L10.4 11.15L12.967 2H14.55L10.4 14.3Z" />
+        </svg>
       </Link>
 
       <div className="flex items-center gap-1 sm:gap-2">
