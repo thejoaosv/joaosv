@@ -1,81 +1,84 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { BookOpen, House, Link2 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { TransitionLink } from "@/components/transition-link";
+import Link from "next/link";
 
-type PersonalNavProps = {
-  current?: "home" | "links" | "blog";
-};
+const items = [
+  { href: "/", label: "Home", icon: House },
+  { href: "/links", label: "Links", icon: Link2 },
+  { href: "/blog", label: "Blog", icon: BookOpen },
+];
 
-export function PersonalNav({ current = "home" }: PersonalNavProps) {
-  const [lifted, setLifted] = useState(false);
+function LocalTime() {
+  const [time, setTime] = useState("");
 
   useEffect(() => {
-    function updateLiftedState() {
-      setLifted(window.scrollY > 18);
-    }
-
-    updateLiftedState();
-    window.addEventListener("scroll", updateLiftedState, { passive: true });
-
-    return () => window.removeEventListener("scroll", updateLiftedState);
+    const format = new Intl.DateTimeFormat("en", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+      timeZone: "Europe/Lisbon", // same zone as Porto
+      timeZoneName: "shortOffset", // "GMT" or "GMT+0" in winter (varies by engine), "GMT+1" in summer
+    });
+    const update = () => {
+      const parts = format.formatToParts(new Date());
+      const part = (type: string) => parts.find((p) => p.type === type)?.value;
+      const zone = part("timeZoneName") === "GMT+1" ? "WEST" : "WET";
+      setTime(`${part("hour")}:${part("minute")} ${zone}`);
+    };
+    update();
+    const id = window.setInterval(update, 30_000);
+    return () => window.clearInterval(id);
   }, []);
 
+  // Rendered after mount only, so server and client markup match.
+  if (!time) return null;
   return (
-    <nav className="fixed left-0 right-0 top-3 z-50 px-4 md:top-5">
-      <div
-        className={`mx-auto flex h-12 max-w-4xl items-center justify-between border px-2 text-sm text-[color:var(--page-fg)] backdrop-blur-xl transition-all duration-500 md:px-3 ${
-          lifted
-            ? "border-[color:color-mix(in_srgb,var(--page-fg)_8%,transparent)] bg-[color:color-mix(in_srgb,var(--page-bg)_72%,transparent)] shadow-[0_14px_38px_color-mix(in_srgb,var(--page-fg)_7%,transparent)]"
-            : "border-transparent bg-transparent shadow-none"
-        }`}
-      >
-        <TransitionLink
-          href="/"
-          className="flex items-center gap-2 font-medium"
-          aria-label="Go home"
-        >
-          <span className="grid size-8 place-items-center bg-[color:var(--page-fg)] text-xs font-semibold text-[color:var(--page-bg)] transition-colors duration-500">
-            JV
-          </span>
-          <span className="hidden sm:inline">João</span>
-        </TransitionLink>
+    <span className="whitespace-nowrap text-[13px] max-[359px]:hidden text-[color:var(--page-faint)] tabular-nums" title="My local time in Portugal">
+      {time}
+    </span>
+  );
+}
 
-        <div className="flex items-center gap-1">
-          <TransitionLink
-            href="/"
-            className={`px-2 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:px-3 ${
-              current === "home" ? "text-[color:var(--page-fg)]" : "text-[color:var(--page-muted)]"
+export function PersonalNav() {
+  const pathname = usePathname();
+  const active = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  // Phones: equal gaps between the three groups. From sm up: links truly centred.
+  return (
+    <nav className="sticky top-0 z-20 flex h-16 items-center justify-between gap-2 px-4 text-[15px] sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-4 md:px-6">
+      <Link
+        href="/"
+        className="-ml-2 justify-self-start p-2 text-[color:var(--page-fg)] transition-opacity hover:opacity-75"
+        aria-label="João Vasconcelos, home"
+      >
+        {/* JV mark, brand/logo/jv-mark.svg */}
+        <svg viewBox="0 0 16 16" className="size-6" fill="currentColor" aria-hidden="true">
+          <path d="M3.55 2H5.05V11.43L4.185 14H1.45L1.921 12.6H3.121L3.55 11.326Z M6.25 2H7.833L10.4 11.15L12.967 2H14.55L10.4 14.3Z" />
+        </svg>
+      </Link>
+
+      <div className="flex items-center gap-1 sm:gap-2">
+        {items.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={active(item.href) ? "page" : undefined}
+            className={`inline-flex items-center gap-2 rounded-lg px-2.5 py-2 transition-colors hover:text-[color:var(--page-fg)] ${
+              active(item.href) ? "text-[color:var(--page-fg)]" : "text-[color:var(--page-muted)]"
             }`}
           >
-            Home
-          </TransitionLink>
-          <TransitionLink
-            href="/links"
-            className={`px-2 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:px-3 ${
-              current === "links" ? "text-[color:var(--page-fg)]" : "text-[color:var(--page-muted)]"
-            }`}
-          >
-            Links
-          </TransitionLink>
-          <TransitionLink
-            href="/blog"
-            className={`px-2 py-2 transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:px-3 ${
-              current === "blog" ? "text-[color:var(--page-fg)]" : "text-[color:var(--page-muted)]"
-            }`}
-          >
-            Blog
-          </TransitionLink>
-          <a
-            href="mailto:hey@joaosv.com"
-            className="hidden items-center gap-1 px-3 py-2 text-[color:var(--page-muted)] transition-colors duration-500 hover:text-[color:var(--page-fg)] sm:inline-flex"
-          >
-            Write <ArrowUpRight className="size-3.5" />
-          </a>
-          <ThemeToggle />
-        </div>
+            <item.icon className="hidden size-4 sm:block" aria-hidden="true" />
+            {item.label}
+          </Link>
+        ))}
+      </div>
+
+      <div className="justify-self-end">
+        <LocalTime />
       </div>
     </nav>
   );

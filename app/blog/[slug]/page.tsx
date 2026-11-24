@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { PersonalNav } from "@/components/personal-nav";
-import { TransitionLink } from "@/components/transition-link";
+import Link from "next/link";
 import { formatPostDate, getAllPosts, getPost } from "@/lib/blog";
 
 type BlogPostPageProps = {
@@ -30,7 +29,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} | João Vasconcelos`,
+    title: post.title,
     description: post.description,
   };
 }
@@ -44,40 +43,38 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[color:var(--page-bg)] px-5 pb-16 pt-28 text-[color:var(--page-fg)] md:px-8 md:pt-32">
-      <PersonalNav current="blog" />
-
-      <article className="mx-auto max-w-3xl">
-        <TransitionLink
+    <main className="page">
+      <article>
+        <Link
           href="/blog"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-[color:var(--page-muted)] transition-colors hover:text-[color:var(--page-fg)]"
+          className="-my-2 mb-6 inline-flex items-center gap-2 py-2 text-sm text-[color:var(--page-muted)] transition-colors hover:text-[color:var(--page-fg)]"
         >
-          <ArrowLeft className="size-4" />
-          Blog
-        </TransitionLink>
+          <ArrowLeft className="size-4" aria-hidden="true" />
+          All posts
+        </Link>
 
         <header className="border-b border-[color:var(--page-line)] pb-10">
           <p className="mb-5 text-sm text-[color:var(--page-muted)]">
-            {formatPostDate(post.date)} / {post.readingTime}
+            {formatPostDate(post.date)} · {post.readingTime}
           </p>
-          <h1 className="text-[clamp(3rem,7vw,5.8rem)] font-semibold leading-[0.92]">
+          <h1 className="title">
             {post.title}
           </h1>
           {post.description ? (
-            <p className="mt-7 text-lg leading-8 text-[color:var(--page-muted)] md:text-xl md:leading-9">
+            <p className="lede">
               {post.description}
             </p>
           ) : null}
         </header>
 
-        <div className="blog-content pt-10">
+        <div className="pt-10 [&>*:first-child]:mt-0">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
               a: ({ children, ...props }) => (
                 <a
                   {...props}
-                  className="font-medium underline decoration-[color:var(--page-line-strong)] underline-offset-4 transition-colors hover:text-[color:var(--page-muted)]"
+                  className="font-medium text-[color:var(--page-fg)] underline decoration-[color:var(--page-line-strong)] underline-offset-4 hover:decoration-[color:var(--page-fg)]"
                   target={props.href?.startsWith("http") ? "_blank" : undefined}
                   rel={
                     props.href?.startsWith("http")
@@ -94,12 +91,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </blockquote>
               ),
               code: ({ children, className }) => {
-                const isBlock = className?.startsWith("language-");
+                // Fenced blocks without a language have no class but end in a newline.
+                const isBlock =
+                  className?.startsWith("language-") || String(children).endsWith("\n");
 
                 return isBlock ? (
                   <code className={className}>{children}</code>
                 ) : (
-                  <code className="bg-[color:var(--page-card)] px-1.5 py-0.5 text-sm">
+                  <code className="rounded bg-[color:var(--page-panel)] px-1.5 py-0.5 text-sm">
                     {children}
                   </code>
                 );
@@ -120,11 +119,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <img
                   src={src ?? ""}
                   alt={alt ?? ""}
-                  className="my-9 w-full border border-[color:var(--page-line)] bg-[color:var(--page-card)] object-cover"
+                  className="my-9 w-full rounded-xl border border-[color:var(--page-line)] object-cover"
                 />
               ),
               li: ({ children }) => (
-                <li className="pl-1 text-base leading-8 text-[color:var(--page-muted)]">
+                <li className="pl-1 text-[17px] leading-8 text-[color:var(--page-prose)]">
                   {children}
                 </li>
               ),
@@ -134,14 +133,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </ol>
               ),
               p: ({ children }) => (
-                <p className="my-5 text-base leading-8 text-[color:var(--page-muted)]">
+                <p className="my-5 text-[17px] leading-8 text-[color:var(--page-prose)]">
                   {children}
                 </p>
               ),
               pre: ({ children }) => (
-                <pre className="my-8 overflow-x-auto border border-[color:var(--page-line)] bg-[color:var(--page-card)] p-4 text-sm leading-6">
+                <pre className="panel my-8 overflow-x-auto p-4 text-sm leading-6">
                   {children}
                 </pre>
+              ),
+              table: ({ children }) => (
+                <div className="my-8 overflow-x-auto">
+                  <table className="w-full border-collapse text-left text-[15px]">{children}</table>
+                </div>
+              ),
+              th: ({ children }) => (
+                <th className="border-b border-[color:var(--page-line-strong)] px-3 py-2 font-medium">{children}</th>
+              ),
+              td: ({ children }) => (
+                <td className="border-b border-[color:var(--page-line)] px-3 py-2 text-[color:var(--page-prose)]">{children}</td>
               ),
               ul: ({ children }) => (
                 <ul className="my-6 list-disc space-y-2 pl-5">{children}</ul>
@@ -153,13 +163,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         <footer className="mt-12 border-t border-[color:var(--page-line)] pt-8">
-          <TransitionLink
+          <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-[color:var(--page-muted)] transition-colors hover:text-[color:var(--page-fg)]"
+            className="-my-2 inline-flex items-center gap-2 py-2 text-sm text-[color:var(--page-muted)] transition-colors hover:text-[color:var(--page-fg)]"
           >
-            <ArrowLeft className="size-4" />
-            Back to all writing
-          </TransitionLink>
+            <ArrowLeft className="size-4" aria-hidden="true" />
+            Back to all posts
+          </Link>
         </footer>
       </article>
     </main>
